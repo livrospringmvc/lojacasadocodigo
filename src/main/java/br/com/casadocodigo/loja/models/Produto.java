@@ -1,8 +1,9 @@
 package br.com.casadocodigo.loja.models;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,14 +13,23 @@ import javax.persistence.Lob;
 @Entity
 public class Produto {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String titulo;
 	@Lob
 	private String descricao;
-	@Column(scale=2)
-	private BigDecimal valor;
 	private int numeroPaginas;
+	@ElementCollection
+	private List<ValorPorTipo> valores = new ArrayList<ValorPorTipo>();
+
+	public List<ValorPorTipo> getValores() {
+		return valores;
+	}
+
+	public void setValores(List<ValorPorTipo> valores) {
+		this.valores = valores;
+	}
 
 	public String getTitulo() {
 		return titulo;
@@ -37,14 +47,6 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
-	}
-
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
-
 	public int getNumeroPaginas() {
 		return numeroPaginas;
 	}
@@ -53,11 +55,4 @@ public class Produto {
 		this.numeroPaginas = numeroPaginas;
 	}
 
-	@Override
-	public String toString() {
-		return "Produto [titulo=" + titulo + ", descricao=" + descricao
-				+ ", valor=" + valor + ", numeroPaginas=" + numeroPaginas + "]";
-	}
-
-	
 }
