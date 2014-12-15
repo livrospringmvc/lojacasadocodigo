@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
 import br.com.casadocodigo.loja.models.Produto;
@@ -22,8 +23,9 @@ public class ProdutosController {
 	private ProdutoDAO produtos;
 
 	@RequestMapping(method=RequestMethod.POST)
-	public String cadastra(Produto produto){
+	public String cadastra(Produto produto,RedirectAttributes redirectAttributes){
 		produtos.adiciona(produto);
+		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso");
 		return "redirect:produtos";
 	}
 	
@@ -36,7 +38,7 @@ public class ProdutosController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView lista(Model model){
-		ModelAndView modelAndView = new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView("produtos/lista");
 		modelAndView.addObject("produtos", produtos.lista());
 		return modelAndView;
 	}
