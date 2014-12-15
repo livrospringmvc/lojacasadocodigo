@@ -18,7 +18,7 @@
 		</tr>
 		<c:forEach items="${produtos}" var="produto">
 			<tr>
-				<td>${produto.titulo}</td>
+				<td><a href="/casadocodigo/produtos/${produto.id}">${produto.titulo}</a></td>
 				<td>
 					<c:forEach items="${produto.valores}" var="valorTipo">
 						[${valorTipo.valor} - ${valorTipo.tipoLivro}]

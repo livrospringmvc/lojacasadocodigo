@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,6 +41,15 @@ public class ProdutosController {
 	public ModelAndView lista(Model model){
 		ModelAndView modelAndView = new ModelAndView("produtos/lista");
 		modelAndView.addObject("produtos", produtos.lista());
+		return modelAndView;
+	}
+	
+	@RequestMapping("/{id}")
+	public ModelAndView edita(@PathVariable("id") Integer id){
+		ModelAndView modelAndView = new ModelAndView("produtos/edita");
+		Produto produto = produtos.busca(id);
+		System.out.println(produto);
+		modelAndView.addObject("produto", produto);
 		return modelAndView;
 	}
 	

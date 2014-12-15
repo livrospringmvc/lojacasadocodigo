@@ -22,6 +22,10 @@ public class Produto {
 	private int numeroPaginas;
 	@ElementCollection
 	private List<ValorPorTipo> valores = new ArrayList<ValorPorTipo>();
+	
+	public Integer getId() {
+		return id;
+	}
 
 	public List<ValorPorTipo> getValores() {
 		return valores;
@@ -54,5 +58,14 @@ public class Produto {
 	public void setNumeroPaginas(int numeroPaginas) {
 		this.numeroPaginas = numeroPaginas;
 	}
+
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", titulo=" + titulo + ", descricao="
+				+ descricao + ", numeroPaginas=" + numeroPaginas + ", valores="
+				+ valores + "]";
+	}
+	
+	
 
 }
