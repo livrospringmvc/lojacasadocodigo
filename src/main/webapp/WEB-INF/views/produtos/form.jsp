@@ -1,12 +1,20 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-
+<body>	
+	<spring:hasBindErrors name="produto">
+		<ul>
+		<c:forEach var="error" items="${errors.allErrors}">		
+			<li>${error.code}</li>
+		</c:forEach>
+		</ul>
+	</spring:hasBindErrors>
 	<form action="/casadocodigo/produtos" method="post">
 		<div>
 			<label for="titulo">Titulo</label>
