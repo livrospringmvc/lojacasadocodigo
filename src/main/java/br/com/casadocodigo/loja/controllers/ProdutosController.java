@@ -30,7 +30,7 @@ public class ProdutosController {
 	
 	@InitBinder
     protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(new ProdutoValidator());
+		//binder.setValidator(new ProdutoValidator());
     }	
 
 	@RequestMapping(method=RequestMethod.POST)
