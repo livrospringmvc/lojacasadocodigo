@@ -9,9 +9,11 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.springframework.format.AnnotationFormatterFactory;
+import org.springframework.format.Formatter;
 import org.springframework.format.Parser;
 import org.springframework.format.Printer;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.StringUtils;
 
 public class StringToCalendarConverver implements
 		AnnotationFormatterFactory<DateTimeFormat> {
@@ -33,16 +35,14 @@ public class StringToCalendarConverver implements
 		return new CalendarFormatter(annotation);
 	}
 
-	private static class CalendarFormatter implements Printer<Calendar>,
-			Parser<Calendar> {
+	private static class CalendarFormatter implements Formatter<Calendar>{
 
-		private DateTimeFormat dateTimeFormat;
 		private SimpleDateFormat formatter;
+		private SimpleDateFormat displayFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
 		public CalendarFormatter(DateTimeFormat dateTimeFormat) {
-			this.dateTimeFormat = dateTimeFormat;
 			String pattern = dateTimeFormat.pattern();
-			if(pattern == null){
+			if(!StringUtils.hasText(pattern)){
 				pattern = "yyyy-MM-dd";
 			}
 			formatter = new SimpleDateFormat(pattern);
@@ -50,6 +50,7 @@ public class StringToCalendarConverver implements
 
 		@Override
 		public Calendar parse(String text, Locale locale) throws ParseException {
+			System.out.println(text + "===chegando aqui");
 			Date date = formatter.parse(text);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);

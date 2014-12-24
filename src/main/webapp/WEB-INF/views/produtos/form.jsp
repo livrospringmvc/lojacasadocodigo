@@ -1,6 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.casadocodigo.com.br/tags/form" prefix="customForm" %>
 
 <!DOCTYPE html>
 <html>
@@ -32,8 +33,8 @@
 			<form:errors path="numeroPaginas"/>
 		</div>
 		<div>
-			<label for="releaseDate">Data de lançamento</label>
-			<input type="date" name="releaseDate" id="releaseDate"/>
+			<label for="releaseDate">Data de lançamento</label>			
+			<customForm:date path="releaseDate"/>
 			<form:errors path="releaseDate"/>
 		</div>		
 		<div>

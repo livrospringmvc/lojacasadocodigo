@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.loja.controllers.HomeController;
+import br.com.casadocodigo.loja.converters.StringToCalendarConverver;
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
 
 @Configuration
@@ -44,9 +45,10 @@ public class ConfiguracaoAppWeb {
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(true);
 		
         // Register date conversion with a specific global format
-        DateFormatterRegistrar registrar = new DateFormatterRegistrar();
-        registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
-        registrar.registerFormatters(conversionService);		
+//        DateFormatterRegistrar registrar = new DateFormatterRegistrar();
+//        registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
+//        registrar.registerFormatters(conversionService);	
+        conversionService.addFormatterForFieldAnnotation(new StringToCalendarConverver());
 		return conversionService;
 	}
 	

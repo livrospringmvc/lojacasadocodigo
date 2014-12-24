@@ -32,6 +32,7 @@ public class Produto {
 	//motivar que eu quero fazer uma configuração global suportando este estilo
 	//primeiro motiva que podemos criar um converter para isso.
 //	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat
 	private Calendar releaseDate;
 	
 	
