@@ -11,6 +11,7 @@ import br.com.casadocodigo.loja.controllers.TipoLivro;
 public class ValorPorTipo {
 
 	@Column(scale = 2)
+	//@NumberFormat(style=Style.CURRENCY)
 	private BigDecimal valor;
 	private TipoLivro tipoLivro;
 

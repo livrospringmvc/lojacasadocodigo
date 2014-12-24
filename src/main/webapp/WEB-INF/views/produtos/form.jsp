@@ -11,15 +11,15 @@
 <body>	
 	<spring:hasBindErrors name="produto">
 		<ul>
-		<c:forEach var="error" items="${errors.allErrors}">		
-			<li>${error.code}</li>
+		<c:forEach var="error" items="${errors.allErrors}">	
+			<li>${error.code}-${error.field}</li>
 		</c:forEach>
 		</ul>
 	</spring:hasBindErrors>
 	<form:form action="/casadocodigo/produtos" method="post" commandName="produto">
 		<div>
 			<label for="titulo">Titulo</label>
-			<input type="text" name="titulo" id="titulo"/>
+			<form:input path="titulo"/>
 			<form:errors path="titulo"/>
 		</div>
 		<div>
@@ -31,6 +31,11 @@
 			<input type="text" name="numeroPaginas" id="numeroPaginas"/>
 			<form:errors path="numeroPaginas"/>
 		</div>
+		<div>
+			<label for="releaseDate">Data de lançamento</label>
+			<input type="date" name="releaseDate" id="releaseDate"/>
+			<form:errors path="releaseDate"/>
+		</div>		
 		<div>
 			<c:forEach items="${tiposLivro}" var="tipoLivro" varStatus="status">
 				<div>
