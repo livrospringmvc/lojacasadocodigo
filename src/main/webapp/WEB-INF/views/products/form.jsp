@@ -37,7 +37,11 @@
 			<label for="releaseDate">Data de lançamento</label>			
 			<customForm:genericInput path="releaseDate" type="date"/>
 			<form:errors path="releaseDate"/>
-		</div>		
+		</div>	
+		<div>
+			<label for="summary">Sumario do livro</label>
+			<input type="file" name="summary"/>
+			<form:errors path="summaryPath"/>			
 		<div>
 			<c:forEach items="${bookTypes}" var="bookType" varStatus="status">
 				<div>
@@ -47,10 +51,6 @@
 				</div>
 			</c:forEach>
 		</div>
-		<div>
-			<label for="summary">Sumario do livro</label>
-			<input type="file" name="summary"/>
-			<form:errors path="summary"/>
 		</div>
 		<div>
 			<input type="submit" value="Enviar">

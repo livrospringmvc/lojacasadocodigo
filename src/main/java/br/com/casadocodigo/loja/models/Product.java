@@ -31,15 +31,22 @@ public class Product {
 	private int pages;
 	@ElementCollection
 	private List<Price> prices = new ArrayList<Price>();
-	
-	//motivar que eu quero fazer uma configuração global suportando este estilo
-	//primeiro motiva que podemos criar um converter para isso.
-//	@DateTimeFormat(iso=ISO.DATE)
+
+	// motivar que eu quero fazer uma configuração global suportando este estilo
+	// primeiro motiva que podemos criar um converter para isso.
+	// @DateTimeFormat(iso=ISO.DATE)
 	@DateTimeFormat
 	private Calendar releaseDate;
-	
-	
-	
+	private String summaryPath;
+
+	public String getSummaryPath() {
+		return summaryPath;
+	}
+
+	public void setSummaryPath(String summaryPath) {
+		this.summaryPath = summaryPath;
+	}
+
 	public Calendar getReleaseDate() {
 		return releaseDate;
 	}

@@ -3,23 +3,20 @@ package br.com.casadocodigo.loja.conf;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
-import org.springframework.format.number.NumberFormatAnnotationFormatterFactory;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.loja.controllers.HomeController;
-import br.com.casadocodigo.loja.converters.StringToCalendarConverver;
 import br.com.casadocodigo.loja.daos.ProductDAO;
+import br.com.casadocodigo.loja.infra.FileSaver;
 
-@Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class,ProductDAO.class})
+@ComponentScan(basePackageClasses={HomeController.class,ProductDAO.class,FileSaver.class})
 public class AppWebConfiguration {
 
 	@Bean
@@ -48,5 +45,6 @@ public class AppWebConfiguration {
         registrar.registerFormatters(conversionService);	
 		return conversionService;
 	}
+	
 	
 }
