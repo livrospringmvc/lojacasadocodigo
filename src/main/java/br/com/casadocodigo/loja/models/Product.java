@@ -10,28 +10,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-public class Produto {
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@NotBlank
-	private String titulo;
+	private String title;
 	@Lob
 	@NotBlank
-	private String descricao;
-	private int numeroPaginas;
+	private String description;
+	@Min(30)
+	private int pages;
 	@ElementCollection
-	private List<ValorPorTipo> valores = new ArrayList<ValorPorTipo>();
+	private List<Price> prices = new ArrayList<Price>();
 	
 	//motivar que eu quero fazer uma configuração global suportando este estilo
 	//primeiro motiva que podemos criar um converter para isso.
-//	@DateTimeFormat(pattern="yyyy-MM-dd")
+//	@DateTimeFormat(iso=ISO.DATE)
 	@DateTimeFormat
 	private Calendar releaseDate;
 	
@@ -49,43 +52,43 @@ public class Produto {
 		return id;
 	}
 
-	public List<ValorPorTipo> getValores() {
-		return valores;
+	public List<Price> getPrices() {
+		return prices;
 	}
 
-	public void setValores(List<ValorPorTipo> valores) {
-		this.valores = valores;
+	public void setPrices(List<Price> valores) {
+		this.prices = valores;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setTitle(String titulo) {
+		this.title = titulo;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescription(String descricao) {
+		this.description = descricao;
 	}
 
-	public int getNumeroPaginas() {
-		return numeroPaginas;
+	public int getPages() {
+		return pages;
 	}
 
-	public void setNumeroPaginas(int numeroPaginas) {
-		this.numeroPaginas = numeroPaginas;
+	public void setPages(int numeroPaginas) {
+		this.pages = numeroPaginas;
 	}
 
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", titulo=" + titulo + ", descricao="
-				+ descricao + ", numeroPaginas=" + numeroPaginas + ", valores="
-				+ valores + "]";
+		return "Produto [id=" + id + ", titulo=" + title + ", descricao="
+				+ description + ", numeroPaginas=" + pages + ", valores="
+				+ prices + "]";
 	}
 
 }

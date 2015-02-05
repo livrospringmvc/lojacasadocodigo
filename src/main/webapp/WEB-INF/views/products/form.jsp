@@ -10,41 +10,47 @@
 <title>Insert title here</title>
 </head>
 <body>	
-	<spring:hasBindErrors name="produto">
+	<spring:hasBindErrors name="product">
 		<ul>
 		<c:forEach var="error" items="${errors.allErrors}">	
 			<li>${error.code}-${error.field}</li>
 		</c:forEach>
 		</ul>
 	</spring:hasBindErrors>
-	<form:form action="/casadocodigo/produtos" method="post" commandName="produto">
+	<form:form action="${spring:mvcUrl('PC#save').build()}" method="post" commandName="product" enctype="multipart/form-data">
 		<div>
 			<label for="titulo">Titulo</label>
-			<form:input path="titulo"/>
-			<form:errors path="titulo"/>
+			<form:input path="title"/>
+			<form:errors path="title"/>
 		</div>
 		<div>
 			<label for="descricao">Descrição</label>
-			<textarea rows="10" cols="20" name="descricao" id="descricao"></textarea>
+			<form:textarea path="description" rows="10" cols="20"/>
+			<form:errors path="description"/>
 		</div>
 		<div>
 			<label for="numeroPaginas">Número de paginas</label>
-			<input type="text" name="numeroPaginas" id="numeroPaginas"/>
-			<form:errors path="numeroPaginas"/>
+			<form:input path="pages"/>
+			<form:errors path="pages"/>
 		</div>
 		<div>
 			<label for="releaseDate">Data de lançamento</label>			
-			<customForm:date path="releaseDate"/>
+			<customForm:genericInput path="releaseDate" type="date"/>
 			<form:errors path="releaseDate"/>
 		</div>		
 		<div>
-			<c:forEach items="${tiposLivro}" var="tipoLivro" varStatus="status">
+			<c:forEach items="${bookTypes}" var="bookType" varStatus="status">
 				<div>
-					<label for="preco_${tipoLivro}">${tipoLivro}</label>
-					<input type="text" name="valores[${status.index}].valor" id="preco_${tipoLivro}"/>
-					<input type="hidden" name="valores[${status.index}].tipoLivro" value="${tipoLivro}"/>
+					<label for="preco_${bookType}">${bookType}</label>
+					<input type="text" name="prices[${status.index}].value" id="preco_${bookType}"/>
+					<input type="hidden" name="prices[${status.index}].bookType" value="${bookType}"/>
 				</div>
 			</c:forEach>
+		</div>
+		<div>
+			<label for="summary">Sumario do livro</label>
+			<input type="file" name="summary"/>
+			<form:errors path="summary"/>
 		</div>
 		<div>
 			<input type="submit" value="Enviar">

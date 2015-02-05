@@ -9,19 +9,19 @@
 </head>
 <body>
 	<div>
-		${sucesso}
+		${success}
 	</div>
 	<table>
 		<tr>
 			<td>Titulo</td>
 			<td>Valores</td>
 		</tr>
-		<c:forEach items="${produtos}" var="produto">
+		<c:forEach items="${products}" var="product">
 			<tr>
-				<td><a href="/casadocodigo/produtos/${produto.id}">${produto.titulo}</a></td>
+				<td><a href="/casadocodigo/produtos/${product.id}">${product.title}</a></td>
 				<td>
-					<c:forEach items="${produto.valores}" var="valorTipo">
-						[${valorTipo.valor} - ${valorTipo.tipoLivro}]
+					<c:forEach items="${product.prices}" var="price">
+						[${price.value} - ${price.bookType}]
 					</c:forEach>
 				</td>
 			</tr>

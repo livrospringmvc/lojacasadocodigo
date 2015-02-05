@@ -4,13 +4,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import br.com.casadocodigo.loja.models.Produto;
+import br.com.casadocodigo.loja.models.Product;
 
-public class ProdutoValidator implements Validator{
+public class ProductValidator implements Validator{
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Produto.class.isAssignableFrom(clazz);
+		return Product.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -18,8 +18,8 @@ public class ProdutoValidator implements Validator{
 		//
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "titulo", "field.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descricao", "field.required");
-		Produto produto = (Produto) target;
-		if(produto.getNumeroPaginas() == 0){
+		Product produto = (Product) target;
+		if(produto.getPages() == 0){
 			errors.rejectValue("numeroPaginas", "field.required");
 		}
 	}

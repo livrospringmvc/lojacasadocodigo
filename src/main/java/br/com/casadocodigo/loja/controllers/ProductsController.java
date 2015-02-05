@@ -16,53 +16,53 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.casadocodigo.loja.daos.ProdutoDAO;
-import br.com.casadocodigo.loja.models.Produto;
-import br.com.casadocodigo.loja.validacao.ProdutoValidator;
+import br.com.casadocodigo.loja.daos.ProductDAO;
+import br.com.casadocodigo.loja.models.Product;
+import br.com.casadocodigo.loja.models.BookType;
+import br.com.casadocodigo.loja.validacao.ProductValidator;
 
 @Controller
 @Transactional
 @RequestMapping("/produtos")
-public class ProdutosController {
+public class ProductsController {
 
 	@Autowired
-	private ProdutoDAO produtos;
+	private ProductDAO products;
 	
 	@InitBinder
     protected void initBinder(WebDataBinder binder) {
-		//binder.setValidator(new ProdutoValidator());
+		//binder.setValidator(new ProductValidator());
     }	
 
 	@RequestMapping(method=RequestMethod.POST)
-	public ModelAndView cadastra(@Valid @ModelAttribute("produto") Produto produto,BindingResult bindingResult,RedirectAttributes redirectAttributes){
+	public ModelAndView save(@ModelAttribute("product") @Valid Product product,BindingResult bindingResult,RedirectAttributes redirectAttributes){
 		if(bindingResult.hasErrors()){
-			return form(produto);
+			return form(product);
 		}
-		produtos.adiciona(produto);
-		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso");
+		products.save(product);
+		redirectAttributes.addFlashAttribute("success", "Produto cadastrado com sucesso");
 		return new ModelAndView("redirect:produtos");
 	}
 	
 	@RequestMapping("/form")
-	public ModelAndView form(@ModelAttribute Produto produto){
-		ModelAndView modelAndView = new ModelAndView("produtos/form");
-		modelAndView.addObject("tiposLivro", TipoLivro.values());
+	public ModelAndView form(@ModelAttribute Product product){
+		ModelAndView modelAndView = new ModelAndView("products/form");
+		modelAndView.addObject("bookTypes", BookType.values());
 		return modelAndView;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView lista(Model model){
-		ModelAndView modelAndView = new ModelAndView("produtos/lista");
-		modelAndView.addObject("produtos", produtos.lista());
+	public ModelAndView list(Model model){
+		ModelAndView modelAndView = new ModelAndView("products/list");
+		modelAndView.addObject("products", products.list());
 		return modelAndView;
 	}
 	
 	@RequestMapping("/{id}")
-	public ModelAndView edita(@PathVariable("id") Integer id){
-		ModelAndView modelAndView = new ModelAndView("produtos/edita");
-		Produto produto = produtos.busca(id);
-		System.out.println(produto);
-		modelAndView.addObject("produto", produto);
+	public ModelAndView edit(@PathVariable("id") Integer id){
+		ModelAndView modelAndView = new ModelAndView("products/edit");
+		Product product = products.busca(id);
+		modelAndView.addObject("produto", product);
 		return modelAndView;
 	}
 	

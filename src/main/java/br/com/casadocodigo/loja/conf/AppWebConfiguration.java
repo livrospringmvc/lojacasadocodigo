@@ -15,12 +15,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.loja.controllers.HomeController;
 import br.com.casadocodigo.loja.converters.StringToCalendarConverver;
-import br.com.casadocodigo.loja.daos.ProdutoDAO;
+import br.com.casadocodigo.loja.daos.ProductDAO;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class,ProdutoDAO.class})
-public class ConfiguracaoAppWeb {
+@ComponentScan(basePackageClasses={HomeController.class,ProductDAO.class})
+public class AppWebConfiguration {
 
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
@@ -40,15 +40,12 @@ public class ConfiguracaoAppWeb {
 	}
 	
 	@Bean
-	//O nome que devemos sobreescrever é mvcConversionService.
     public FormattingConversionService mvcConversionService() {
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(true);
 		
-        // Register date conversion with a specific global format
-//        DateFormatterRegistrar registrar = new DateFormatterRegistrar();
-//        registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
-//        registrar.registerFormatters(conversionService);	
-        conversionService.addFormatterForFieldAnnotation(new StringToCalendarConverver());
+        DateFormatterRegistrar registrar = new DateFormatterRegistrar();
+        registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
+        registrar.registerFormatters(conversionService);	
 		return conversionService;
 	}
 	
