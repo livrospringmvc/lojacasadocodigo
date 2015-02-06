@@ -131,6 +131,15 @@
 			<version>2.4</version>
 		</dependency>
 
+		<!-- javax.inject -->
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
+
 	</dependencies>
 
 
