@@ -29,4 +29,11 @@ public class Price {
 		this.bookType = tipoLivro;
 	}
 
+	@Override
+	public String toString() {
+		return "Price [value=" + value + ", bookType=" + bookType + "]";
+	}
+	
+	
+
 }

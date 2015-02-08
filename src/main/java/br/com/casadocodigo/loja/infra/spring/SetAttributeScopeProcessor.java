@@ -3,11 +3,9 @@ package br.com.casadocodigo.loja.infra.spring;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.WebRequest;
 
-@Component
 public class SetAttributeScopeProcessor implements BeanPostProcessor {
 	
 	@Override

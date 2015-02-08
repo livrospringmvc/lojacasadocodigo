@@ -13,27 +13,19 @@
 	<div>
 		${success}
 	</div>
-	${shoppingCart}
 	<table>
 		<tr>
 			<td>Titulo</td>
 			<td>Valores</td>
-			<td>Carrinho</td>
 		</tr>
 		<c:forEach items="${products}" var="product">
 			<tr>
-				<td><a href="/casadocodigo/produtos/${product.id}">${product.title}</a></td>
+				<td><a href="${spring:mvcUrl('PC#show').arg(0,product.id).build()}">${product.title}</a></td>
 				<td>
 					<c:forEach items="${product.prices}" var="price">
 						[${price.value} - ${price.bookType}]
 					</c:forEach>
 				</td>
-				<td>
-					<form action="${spring:mvcUrl('SCC#add').arg(0,product.id).build()}" method="post">
-						<input type="submit" value="Adicionar">
-					</form>
-				</td>
-				
 			</tr>
 		</c:forEach>
 	</table>
