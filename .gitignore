@@ -8,3 +8,5 @@ src/main/webapp/META-INF
 .idea
 *.iml
 imagens-textos-livro
+jsonData.txt
+output.txt

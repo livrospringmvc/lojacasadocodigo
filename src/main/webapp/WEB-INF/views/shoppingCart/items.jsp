@@ -135,7 +135,11 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="2"><input type="submit" class="checkout" name="checkout" value="Finalizar compra " id="checkout"/></td>
+          <td colspan="2">
+          	<form action="${spring:mvcUrl('PC#checkout').build()}" method="post">
+          		<input type="submit" class="checkout" name="checkout" value="Finalizar compra " id="checkout"/>
+          	</form>
+          </td>
           <td class="numeric-cell">${shoppingCart.total}</td><td></td>
         </tr>
       </tfoot>

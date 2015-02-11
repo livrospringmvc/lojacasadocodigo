@@ -8,6 +8,7 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -45,6 +46,11 @@ public class AppWebConfiguration {
         registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
         registrar.registerFormatters(conversionService);	
 		return conversionService;
+	}
+	
+	@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
 	}
 	
 	

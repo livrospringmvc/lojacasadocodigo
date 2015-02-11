@@ -33,10 +33,9 @@ public class ShoppingCartController {
 
 	@RequestMapping(method=RequestMethod.POST)	
 	public ModelAndView add(Integer productId,@RequestParam BookType bookType){
-		System.out.println(bookType);
 		ShoppingItem item = createItem(productId, bookType);
 		shoppingCart.add(item);
-		return new ModelAndView("redirect:/produtos");
+		return new ModelAndView("redirect:/shopping");
 	}
 
 	private ShoppingItem createItem(Integer productId, BookType bookType) {
