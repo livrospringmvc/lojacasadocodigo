@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,7 @@ public class ProductsController {
 	
 
 	@RequestMapping(method=RequestMethod.POST)
+	@CacheEvict(value="lastProducts", allEntries=true)
 	public ModelAndView save(Part summary,@ModelAttribute("product") @Valid Product product,BindingResult bindingResult,RedirectAttributes redirectAttributes) throws IOException{
 		if(bindingResult.hasErrors()){
 			return form(product);

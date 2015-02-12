@@ -68,7 +68,7 @@ public class AppWebConfiguration {
 	@Bean
 	public CacheManager cacheManager() {
 		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().maximumSize(100)
-				.expireAfterAccess(15, TimeUnit.SECONDS);
+				.expireAfterAccess(5, TimeUnit.MINUTES);
 		GuavaCacheManager cacheManager = new GuavaCacheManager();
 		cacheManager.setCacheBuilder(builder);
 		return cacheManager;
