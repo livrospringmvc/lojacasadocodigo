@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +71,9 @@ public class ProductsController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView list(Model model){
+	@Cacheable("lastProducts")
+	public ModelAndView list(){
+		System.out.println("listando");
 		ModelAndView modelAndView = new ModelAndView("products/list");
 		modelAndView.addObject("products", products.list());
 		return modelAndView;
