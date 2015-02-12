@@ -73,7 +73,7 @@ public class ProductsController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	@Cacheable("lastProducts")
+	@Cacheable(value="lastProducts",keyGenerator="headerKeyGenerator")
 	public ModelAndView list(){
 		System.out.println("listando");
 		ModelAndView modelAndView = new ModelAndView("products/list");

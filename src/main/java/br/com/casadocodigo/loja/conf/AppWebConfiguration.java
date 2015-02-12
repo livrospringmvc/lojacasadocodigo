@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.google.common.cache.CacheBuilder;
 
+import br.com.casadocodigo.loja.cache.RequestHeaderKeyGeneration;
 import br.com.casadocodigo.loja.controllers.HomeController;
 import br.com.casadocodigo.loja.daos.ProductDAO;
 import br.com.casadocodigo.loja.infra.FileSaver;
@@ -27,7 +28,7 @@ import br.com.casadocodigo.loja.models.ShoppingCart;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses = { HomeController.class, ProductDAO.class,
-		FileSaver.class, ShoppingCart.class })
+		FileSaver.class, ShoppingCart.class,RequestHeaderKeyGeneration.class })
 @EnableCaching
 public class AppWebConfiguration {
 
