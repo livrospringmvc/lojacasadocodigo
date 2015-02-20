@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -47,13 +48,13 @@ public class ProductsController {
 
 	@RequestMapping(method=RequestMethod.POST)
 	@CacheEvict(value="lastProducts", allEntries=true)
-	public ModelAndView save(Part summary,@ModelAttribute("product") @Valid Product product,BindingResult bindingResult,RedirectAttributes redirectAttributes) throws IOException{
+	public ModelAndView save(MultipartFile summary,@ModelAttribute("product") @Valid Product product,BindingResult bindingResult,RedirectAttributes redirectAttributes) throws IOException{
 		if(bindingResult.hasErrors()){
 			return form(product);
 		}
 		
 		//Sera que passo o product como parametro?
-		String webPath = fileSaver.write("uploaded-images",HttpPartUtils.extractFileName(summary),summary);
+		String webPath = fileSaver.write("uploaded-images",summary);
 		product.setSummaryPath(webPath);
 		products.save(product);
 		
