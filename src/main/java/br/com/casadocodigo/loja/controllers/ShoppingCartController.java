@@ -26,10 +26,6 @@ public class ShoppingCartController {
 	@Autowired
 	private ShoppingCart shoppingCart;
 	
-	@InitBinder
-    protected void initBinder(HttpSession session) {
-		session.setAttribute("shoppingCart", shoppingCart);
-    }
 
 	@RequestMapping(method=RequestMethod.POST)	
 	public ModelAndView add(Integer productId,@RequestParam BookType bookType){
