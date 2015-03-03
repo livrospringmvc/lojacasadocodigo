@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import br.com.casadocodigo.loja.models.PaymentData;
 import br.com.casadocodigo.loja.models.ShoppingCart;
 
 @RestController
@@ -23,9 +23,8 @@ public class PaymentController {
 	public Callable<String> checkout() {
 		return () -> {
 			BigDecimal total = shoppingCart.getTotal();
-			String uriToPay = MvcUriComponentsBuilder.fromMappingName("PG#pay")
-					.arg(0, total).build();
-			restTemplate.postForLocation(uriToPay, null);
+			String uriToPay = "http://book-payment.herokuapp.com/payment";
+			String response = restTemplate.postForObject(uriToPay, new PaymentData(total),String.class);
 			return "redirect:/success";
 		};
 	}
