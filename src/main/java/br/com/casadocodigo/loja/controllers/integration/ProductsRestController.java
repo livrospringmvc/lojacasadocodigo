@@ -13,14 +13,14 @@ import br.com.casadocodigo.loja.daos.ProductDAO;
 import br.com.casadocodigo.loja.models.Product;
 
 @RestController
-@RequestMapping(value = "/produtos", produces = MediaType.APPLICATION_JSON_VALUE)
+//@RequestMapping(value = "/produtos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductsRestController {
 	
 	@Autowired
 	private ProductDAO productDAO;
 
-	@RequestMapping(method = RequestMethod.GET)
-	@Cacheable(value = "lastProducts", keyGenerator = "headerKeyGenerator")
+//	@RequestMapping(method = RequestMethod.GET)
+//	@Cacheable(value = "lastProducts", keyGenerator = "headerKeyGenerator")
 	public List<Product> listOtherFormats() {
 		return productDAO.list();
 	}

@@ -22,7 +22,6 @@ public class RequestHeaderKeyGeneration implements KeyGenerator{
 	public Object generate(Object target, Method method, Object... params) {
 		SimpleKeyGenerator simpleKeyGenerator = new SimpleKeyGenerator();
 		String header = request.getHeader(HttpHeaders.ACCEPT);
-		System.out.println(header);
 		Object delegateKey = simpleKeyGenerator.generate(target, method, params);
 		return new RequestHeaderKey(header,delegateKey);
 	}
