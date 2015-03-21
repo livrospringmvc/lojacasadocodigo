@@ -217,7 +217,43 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
+		<repository>
+			<id>sonatype-oss-public</id>
+			<url>http://oss.sonatype.org/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<additionalProjectFacets>
+						<jst.web>3.1</jst.web>
+					</additionalProjectFacets>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 
 </project>
