@@ -45,7 +45,7 @@ public class ShoppingCartController {
 		return "shoppingCart/items";
 	}
 	
-	@RequestMapping(method=RequestMethod.POST,value="/${productId}")
+	@RequestMapping(method=RequestMethod.POST,value="/{productId}")
 	public String remove(@PathVariable("productId") Integer productId,BookType bookType){
 		shoppingCart.remove(createItem(productId, bookType));
 		return "redirect:/shopping";
