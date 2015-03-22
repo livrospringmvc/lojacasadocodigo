@@ -12,13 +12,13 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[]{SecurityConfiguration.class};
+		return new Class[]{SecurityConfiguration.class,AppWebConfiguration.class,JPAConfiguration.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		// Tem que colocar aqui para ser adicionado no carregamento da servlet base
-		return new Class[]{AppWebConfiguration.class,JPAConfiguration.class};
+		return new Class[]{};
 	}
 
 	@Override
