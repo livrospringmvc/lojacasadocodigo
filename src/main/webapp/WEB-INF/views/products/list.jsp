@@ -8,11 +8,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<spring:message code="products.list-title"/>
+<title></title>
 </head>
 <body>
-	<sec:authentication property="principal" var="user"/>
-	Olá ${user.name}
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal" var="user"/>
+		Olá ${user.name}
+	</sec:authorize>
 	
 	<div>
 		${success}
