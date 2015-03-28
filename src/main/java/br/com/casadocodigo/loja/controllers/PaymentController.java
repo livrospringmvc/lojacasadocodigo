@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.casadocodigo.loja.models.PaymentData;
 import br.com.casadocodigo.loja.models.ShoppingCart;
@@ -22,12 +23,17 @@ public class PaymentController {
 	private RestTemplate restTemplate;
 
 	@RequestMapping(method=RequestMethod.POST)
-	public Callable<String> checkout() {
+	public Callable<ModelAndView> checkout() {
 		return () -> {
+			if(shoppingCart.isEmpty()){
+				ModelAndView modelAndView = new ModelAndView("/shopping");
+				modelAndView.addObject("error", "O carrinho está vazio");
+				return modelAndView;
+			}
 			BigDecimal total = shoppingCart.getTotal();
 			String uriToPay = "http://book-payment.herokuapp.com/payment";
-			String response = restTemplate.postForObject(uriToPay, new PaymentData(total),String.class);
-			return "redirect:/success";
+			restTemplate.postForObject(uriToPay, new PaymentData(total),String.class);
+			return new ModelAndView("redirect:/success");
 		};
 	}
 

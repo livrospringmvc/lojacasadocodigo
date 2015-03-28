@@ -14,7 +14,7 @@ public class Price {
 	//@NumberFormat(style=Style.CURRENCY)
 	private BigDecimal value;
 	private BookType bookType;
-
+	
 	public BigDecimal getValue() {
 		return value;
 	}

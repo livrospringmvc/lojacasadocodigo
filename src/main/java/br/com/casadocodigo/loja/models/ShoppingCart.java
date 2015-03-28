@@ -53,4 +53,8 @@ public class ShoppingCart {
 		items.remove(shoppingItem);
 	}
 
+	public boolean isEmpty() {
+		return items.isEmpty();
+	}
+
 }
