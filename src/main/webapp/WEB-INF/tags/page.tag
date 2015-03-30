@@ -2,8 +2,8 @@
 <%@attribute name="bodyClass" required="true" %>
 <%@attribute name="extraScripts" fragment="true" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!doctype html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt"><![endif]-->

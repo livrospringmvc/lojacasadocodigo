@@ -1,3 +1,5 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>	
 	<header id="layout-header">
 		<div class="clearfix container">
 			<a href="/" id="logo"> 
@@ -13,6 +15,13 @@
 
 						<li><a href="/pages/perguntas-frequentes" rel="nofollow">Perguntas
 								Frequentes </a></li>
+								
+						<li>
+							<a href="<c:url value="/produtos?locale=pt"/>">Português</a>
+						</li>		
+						<li>
+							<a href="<c:url value="/produtos?locale=en_US"/>">Inglês</a>
+						</li>		
 
 					</ul>
 				</nav>
@@ -23,17 +32,19 @@
 		<ul class="container">
 			<li class="category"><a href="http://www.casadocodigo.com.br">Home</a>
 			<li class="category"><a href="/collections/livros-de-agile">
-					Agile </a>
+					<fmt:message key="navigation.category.agile"/>
+					<spring:message code="navigation.category.agile"/> 
+					</a>
 			<li class="category"><a href="/collections/livros-de-front-end">
-					Front End </a>
+					<fmt:message key="navigation.category.front"/> </a>
 			<li class="category"><a href="/collections/livros-de-games">
-					Games </a>
+					<fmt:message key="navigation.category.games"/> </a>
 			<li class="category"><a href="/collections/livros-de-java">
-					Java </a>
+					<fmt:message key="navigation.category.java"/> </a>
 			<li class="category"><a href="/collections/livros-de-mobile">
-					Mobile </a>
+					<fmt:message key="navigation.category.mobile"/> </a>
 			<li class="category"><a
-				href="/collections/livros-desenvolvimento-web"> Web </a>
-			<li class="category"><a href="/collections/outros"> Outros </a>
+				href="/collections/livros-desenvolvimento-web"> <fmt:message key="navigation.category.web"/> </a>
+			<li class="category"><a href="/collections/outros"> <fmt:message key="navigation.category.others"/> </a>
 		</ul>
 	</nav>

@@ -3,18 +3,12 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<spring:message code="products.list-title"/>
-<title></title>
-</head>
-<body>
+<customTags:page bodyClass="" title="">
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal" var="user"/>
-		Olá ${user.name}
+		<spring:message code="users.welcome" arguments="${user.name}"/>
 	</sec:authorize>
 	
 	<div>
@@ -41,5 +35,4 @@
 			</tr>
 		</c:forEach>
 	</table>
-</body>
-</html>
+</customTags:page>	
