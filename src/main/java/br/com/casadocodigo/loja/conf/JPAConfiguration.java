@@ -35,6 +35,7 @@ public class JPAConfiguration {
 	   }
 	 
 	   @Bean	   
+	   @Profile("dev")
 	   public DataSource dataSource(){
 	      DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	      dataSource.setDriverClassName("com.mysql.jdbc.Driver");
