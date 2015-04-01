@@ -1,8 +1,16 @@
 package br.com.casadocodigo.loja.conf;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import javax.security.cert.X509Certificate;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -15,6 +23,8 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.client.RestTemplate;
@@ -138,5 +148,21 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 	@Bean
 	public MultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
+	}
+	
+	@Bean
+	public MailSender mailSender() {
+	
+		JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
+		javaMailSenderImpl.setHost("smtp.gmail.com");
+		javaMailSenderImpl.setPassword("password");
+		javaMailSenderImpl.setPort(587);
+		javaMailSenderImpl.setUsername("compras@casadocodigo.com.br");
+		Properties mailProperties = new Properties();
+		mailProperties.put("mail.smtp.auth", true);
+		mailProperties.put("mail.smtp.starttls.enable", true);
+		javaMailSenderImpl.setJavaMailProperties(mailProperties);
+		
+		return javaMailSenderImpl;
 	}
 }

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.concurrent.Callable;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,8 @@ public class PaymentController {
 	private ShoppingCart shoppingCart;
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private MailSender mailer;
 
 	@RequestMapping(method=RequestMethod.POST)
 	public Callable<ModelAndView> checkout() {
@@ -33,8 +37,18 @@ public class PaymentController {
 			BigDecimal total = shoppingCart.getTotal();
 			String uriToPay = "http://book-payment.herokuapp.com/payment";
 			restTemplate.postForObject(uriToPay, new PaymentData(total),String.class);
+			sendNewPurchaseMail();
 			return new ModelAndView("redirect:/success");
 		};
+	}
+
+	private void sendNewPurchaseMail() {
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setFrom("compras@casadocodigo.com.br");
+		email.setTo("emailDoUsuario");
+		email.setSubject("Nova compra");
+		email.setText("corpodo email");			
+		mailer.send(email);
 	}
 
 }
