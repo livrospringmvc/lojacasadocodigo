@@ -9,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,19 +27,20 @@ public class PaymentController {
 	@Autowired
 	private MailSender mailer;
 
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(value = "checkout", method = RequestMethod.POST)
 	public Callable<ModelAndView> checkout() {
 		return () -> {
-			if(shoppingCart.isEmpty()){
-				ModelAndView modelAndView = new ModelAndView("/shopping");
-				modelAndView.addObject("error", "O carrinho está vazio");
-				return modelAndView;
-			}
 			BigDecimal total = shoppingCart.getTotal();
 			String uriToPay = "http://book-payment.herokuapp.com/payment";
-			restTemplate.postForObject(uriToPay, new PaymentData(total),String.class);
-			sendNewPurchaseMail();
-			return new ModelAndView("redirect:/success");
+			try {
+				restTemplate.postForObject(uriToPay,
+						new PaymentData(total), String.class);
+				sendNewPurchaseMail();
+				return new ModelAndView("redirect:/payment/success");
+			} catch (HttpClientErrorException exception) {
+				return new ModelAndView("redirect:/payment/error");
+			}			
+
 		};
 	}
 
