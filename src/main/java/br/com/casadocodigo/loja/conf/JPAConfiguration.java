@@ -21,10 +21,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class JPAConfiguration {
 
-	@Bean
-	   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	  @Bean
+	   public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 	      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-	      em.setDataSource(dataSource());
+	      em.setDataSource(dataSource);
 	      em.setPackagesToScan(new String[] { "br.com.casadocodigo.loja.models" });
 	 
 	      JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -60,7 +60,7 @@ public class JPAConfiguration {
 	   Properties additionalProperties() {
 	      Properties properties = new Properties();
 	      properties.setProperty("hibernate.hbm2ddl.auto", "update");
-	      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+	      //properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 	      properties.setProperty("hibernate.show_sql", "true");
 	      return properties;
 	   }
