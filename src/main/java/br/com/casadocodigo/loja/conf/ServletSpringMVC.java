@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class ServletSpringMVC extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
+	
+	private Logger logger = Logger.getLogger(ServletSpringMVC.class);
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
@@ -47,6 +50,8 @@ public class ServletSpringMVC extends
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
 		super.onStartup(servletContext);
+		   logger.warn("DB_URL "+System.getProperty("DATABASE_URL")+"====");
+		   logger.warn("AMbiente "+System.getProperty("SPRING_PROFILES_ACTIVE")+"====");
 		servletContext.addListener(RequestContextListener.class);
 		servletContext.setInitParameter(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, "dev");
 		
