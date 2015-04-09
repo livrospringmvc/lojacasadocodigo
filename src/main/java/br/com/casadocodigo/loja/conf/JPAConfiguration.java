@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -21,6 +22,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 public class JPAConfiguration {
+	
+	private Logger logger = Logger.getLogger(JPAConfiguration.class);
 
 	  @Bean
 	   public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
@@ -38,8 +41,8 @@ public class JPAConfiguration {
 	   @Bean	   
 	   @Profile("dev")
 	   public DataSource dataSource(Environment environment){
-		   System.out.println("DB_URL "+environment.getProperty("DATABASE_URL")+"====");
-		   System.out.println("AMbiente "+environment.getProperty("SPRING_PROFILES_ACTIVE")+"====");
+		   logger.info("DB_URL "+environment.getProperty("DATABASE_URL")+"====");
+		   logger.info("AMbiente "+environment.getProperty("SPRING_PROFILES_ACTIVE")+"====");
 	      DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	      dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 	      dataSource.setUrl("jdbc:mysql://localhost:3306/casadocodigo");
