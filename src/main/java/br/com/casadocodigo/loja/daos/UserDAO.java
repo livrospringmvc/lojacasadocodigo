@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import br.com.casadocodigo.loja.models.User;
+import br.com.casadocodigo.loja.models.SystemUser;
 
 @Repository
 public class UserDAO implements UserDetailsService{
@@ -24,8 +24,8 @@ public class UserDAO implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		System.out.println("Tentando logar com "+username);
-		String jpql = "select u from User u where u.login = :login";
-		List<User> users = em.createQuery(jpql,User.class).setParameter("login", username).getResultList();
+		String jpql = "select u from SystemUser u where u.login = :login";
+		List<SystemUser> users = em.createQuery(jpql,SystemUser.class).setParameter("login", username).getResultList();
 		if(users.isEmpty()){
 			throw new UsernameNotFoundException("O usuario "+username+" não existe");
 		}

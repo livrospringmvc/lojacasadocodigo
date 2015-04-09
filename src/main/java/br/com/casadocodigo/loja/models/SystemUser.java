@@ -14,8 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="Users")
-public class User implements UserDetails{
+public class SystemUser implements UserDetails{
 
 	@Id
 	private String login;

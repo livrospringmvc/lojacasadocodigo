@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.casadocodigo.loja.models.PaymentData;
 import br.com.casadocodigo.loja.models.ShoppingCart;
-import br.com.casadocodigo.loja.models.User;
+import br.com.casadocodigo.loja.models.SystemUser;
 
 @RestController
 @RequestMapping("/payment")
@@ -33,7 +33,7 @@ public class PaymentController {
 	private MailSender mailer;
 
 	@RequestMapping(value = "checkout", method = RequestMethod.POST)
-	public Callable<ModelAndView> checkout(@AuthenticationPrincipal User user) {
+	public Callable<ModelAndView> checkout(@AuthenticationPrincipal SystemUser user) {
 		return () -> {
 			BigDecimal total = shoppingCart.getTotal();
 			String uriToPay = "http://book-payment.herokuapp.com/payment";
@@ -49,7 +49,7 @@ public class PaymentController {
 		};
 	}
 
-	private void sendNewPurchaseMail(User user) {
+	private void sendNewPurchaseMail(SystemUser user) {
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setFrom("compras@casadocodigo.com.br");
 		email.setTo(user.getLogin());
