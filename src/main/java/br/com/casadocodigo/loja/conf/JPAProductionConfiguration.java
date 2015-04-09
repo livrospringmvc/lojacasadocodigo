@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
@@ -19,6 +20,7 @@ public class JPAProductionConfiguration {
 	
 	   @Bean	   
 	   public DataSource dataSource() throws URISyntaxException{
+		  System.out.println("Subindo datasource de producao");
 	      DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	      dataSource.setDriverClassName("org.postgresql.Driver");
 	      URI dbUrl = new URI(environment.getProperty("DATABASE_URL"));
