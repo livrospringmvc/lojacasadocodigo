@@ -18,13 +18,20 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class ServletSpringMVC extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
-	
+
 	private Logger logger = Logger.getLogger(ServletSpringMVC.class);
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
+		logger.warn("DB_URL " + System.getProperty("DATABASE_URL") + "====");
+		logger.warn("AMbiente " + System.getProperty("SPRING_PROFILES_ACTIVE")
+				+ "====");
+		System.out.println("DB_URL " + System.getProperty("DATABASE_URL") + "====");
+		System.out.println("AMbiente " + System.getProperty("SPRING_PROFILES_ACTIVE")
+				+ "====");
 		return new Class[] { SecurityConfiguration.class,
-				AppWebConfiguration.class, JPAConfiguration.class,JPAProductionConfiguration.class };
+				AppWebConfiguration.class, JPAConfiguration.class,
+				JPAProductionConfiguration.class };
 	}
 
 	@Override
@@ -50,13 +57,12 @@ public class ServletSpringMVC extends
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
 		super.onStartup(servletContext);
-		   logger.warn("DB_URL "+System.getProperty("DATABASE_URL")+"====");
-		   logger.warn("AMbiente "+System.getProperty("SPRING_PROFILES_ACTIVE")+"====");
 		servletContext.addListener(RequestContextListener.class);
-		servletContext.setInitParameter(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, "dev");
-		
+		servletContext.setInitParameter(
+				AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, "dev");
+
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println(System.getenv("DATABASE_URL"));
 	}
