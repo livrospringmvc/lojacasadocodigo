@@ -41,8 +41,8 @@ public class JPAConfiguration {
 	   @Bean	   
 	   @Profile("dev")
 	   public DataSource dataSource(Environment environment){
-		   logger.info("DB_URL "+environment.getProperty("DATABASE_URL")+"====");
-		   logger.info("AMbiente "+environment.getProperty("SPRING_PROFILES_ACTIVE")+"====");
+		   logger.warn("DB_URL "+environment.getProperty("DATABASE_URL")+"====");
+		   logger.warn("AMbiente "+environment.getProperty("SPRING_PROFILES_ACTIVE")+"====");
 	      DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	      dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 	      dataSource.setUrl("jdbc:mysql://localhost:3306/casadocodigo");
