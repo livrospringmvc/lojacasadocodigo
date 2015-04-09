@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -47,7 +48,7 @@ public class ServletSpringMVC extends
 			throws ServletException {
 		super.onStartup(servletContext);
 		servletContext.addListener(RequestContextListener.class);
-		servletContext.setInitParameter("spring.profiles.default", "dev");
+		servletContext.setInitParameter(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, "dev");
 		
 	}
 	
