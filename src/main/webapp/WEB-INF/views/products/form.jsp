@@ -34,8 +34,8 @@
 			<form:errors path="pages"/>
 		</div>
 		<div>
-			<label for="releaseDate">Data de lançamento</label>			
-			<customForm:genericInput path="releaseDate" type="date"/>
+			<label for="releaseDate">Data de lançamento</label>
+			<form:input path="releaseDate" type="date"/>			
 			<form:errors path="releaseDate"/>
 		</div>	
 		<div>
