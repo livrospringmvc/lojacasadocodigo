@@ -1,16 +1,11 @@
 package br.com.casadocodigo.loja.conf;
 
-import java.util.Map.Entry;
-import java.util.Set;
-
 import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.context.request.RequestContextListener;
@@ -19,16 +14,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class ServletSpringMVC extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
 
-	private Logger logger = Logger.getLogger(ServletSpringMVC.class);
-
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		logger.warn("DB_URL " + System.getProperty("DATABASE_URL") + "====");
-		logger.warn("AMbiente " + System.getProperty("SPRING_PROFILES_ACTIVE")
-				+ "====");
-		System.out.println("DB_URL " + System.getProperty("DATABASE_URL") + "====");
-		System.out.println("AMbiente " + System.getProperty("SPRING_PROFILES_ACTIVE")
-				+ "====");
 		return new Class[] { SecurityConfiguration.class,
 				AppWebConfiguration.class, JPAConfiguration.class,
 				JPAProductionConfiguration.class };
@@ -61,10 +48,6 @@ public class ServletSpringMVC extends
 		servletContext.setInitParameter(
 				AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, "dev");
 
-	}
-
-	public static void main(String[] args) {
-		System.out.println(System.getenv("DATABASE_URL"));
 	}
 
 	@Override

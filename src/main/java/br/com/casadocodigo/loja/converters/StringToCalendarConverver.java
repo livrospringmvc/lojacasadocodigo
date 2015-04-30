@@ -38,7 +38,6 @@ public class StringToCalendarConverver implements
 	private static class CalendarFormatter implements Formatter<Calendar>{
 
 		private SimpleDateFormat formatter;
-		private SimpleDateFormat displayFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
 		public CalendarFormatter(DateTimeFormat dateTimeFormat) {
 			String pattern = dateTimeFormat.pattern();
@@ -50,7 +49,6 @@ public class StringToCalendarConverver implements
 
 		@Override
 		public Calendar parse(String text, Locale locale) throws ParseException {
-			System.out.println(text + "===chegando aqui");
 			Date date = formatter.parse(text);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
