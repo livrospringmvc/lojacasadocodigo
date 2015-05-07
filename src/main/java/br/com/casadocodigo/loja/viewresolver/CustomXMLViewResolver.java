@@ -2,19 +2,24 @@ package br.com.casadocodigo.loja.viewresolver;
 
 import java.util.Locale;
 
+import br.com.casadocodigo.loja.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.Marshaller;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 
-public class CustomXMLViewResolver implements ViewResolver {
+@Component
+public class CustomXMLViewResolver implements LojaViewResolver {
 
-	private Marshaller marshaller;
 
-	@Autowired
-	public CustomXMLViewResolver(Marshaller marshaller) {
-		this.marshaller = marshaller;
+    private final Jaxb2Marshaller marshaller;
+
+	public CustomXMLViewResolver() {
+        marshaller = new Jaxb2Marshaller();
+        marshaller.setClassesToBeBound(Product.class);
 	}
 
 
