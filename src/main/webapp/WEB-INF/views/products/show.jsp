@@ -21,7 +21,7 @@
 				<p itemprop="description" class="book-description">
 				${product.description}
 				 Veja o <a
-						href="<c:url value='/${product.summaryPath}'/>"
+						href="${product.summaryPath}"
 						target="_blank">sum&#225;rio</a> completo do livro!
 				</p>
 			</div>
