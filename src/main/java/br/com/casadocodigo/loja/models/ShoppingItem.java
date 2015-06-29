@@ -3,7 +3,7 @@ package br.com.casadocodigo.loja.models;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-public class ShoppingItem extends Product {
+public class ShoppingItem {
 
 	private Product product;
 	private BookType bookType;
